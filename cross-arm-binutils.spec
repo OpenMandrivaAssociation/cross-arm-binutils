@@ -35,7 +35,7 @@
 Summary:	GNU Binary Utility Development Utilities
 Name:		%{package_prefix}binutils
 Version:	2.20.51.0.4
-Release:	%manbo_mkrel 2
+Release:	%manbo_mkrel 3
 License:	GPLv3+
 Group:		Development/Other
 URL:		http://sources.redhat.com/binutils/
