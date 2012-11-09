@@ -1,0 +1,28 @@
+2008-02-11  Julian Brown  <julian@codesourcery.com>
+
+        Merge from MIPS:
+
+        2004-09-09  Nigel Stephens  <nigel@mips.com>
+
+        bfd/
+        * bfd/ihex.c (ihex_write_object_contents): Truncate address to 32 bits
+        if the top 32 bits are a simple sign extension of the bottom.
+
+diff -p -up binutils-2.19.51.0.2/bfd/ihex.c.mips_ihex~ binutils-2.19.51.0.2/bfd/ihex.c
+--- binutils-2.19.51.0.2/bfd/ihex.c.mips_ihex~	2007-08-01 09:11:48.000000000 -0400
++++ binutils-2.19.51.0.2/bfd/ihex.c	2009-02-11 03:06:11.768528532 -0500
+@@ -770,6 +770,14 @@ ihex_write_object_contents (bfd *abfd)
+       bfd_size_type count;
+ 
+       where = l->where;
++
++      /* If the top 32 bits of a 64-bit address are simply a sign-extension
++	 of the bottom 32 bits, then simply truncate the address to 32 bits. */
++      if (sizeof (bfd_vma) * 8 > 32
++	  && ((where & ~(bfd_vma)0x7fffffff) == 0
++	      || (where & ~(bfd_vma)0x7fffffff) == ~(bfd_vma)0x7fffffff))
++	where &= (bfd_vma)0xffffffffUL;
++
+       p = l->data;
+       count = l->size;
+ 
