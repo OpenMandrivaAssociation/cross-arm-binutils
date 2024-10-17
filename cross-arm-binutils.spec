@@ -38,7 +38,7 @@ Version:	2.20.51.0.4
 Release:	%manbo_mkrel 3
 License:	GPLv3+
 Group:		Development/Other
-URL:		http://sources.redhat.com/binutils/
+URL:		https://sources.redhat.com/binutils/
 Source0:	http://ftp.kernel.org/pub/linux/devel/binutils/binutils-%{version}.tar.bz2
 Source1:	build_cross_binutils.sh
 Source2:	spu_ovl.o
